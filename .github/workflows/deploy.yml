@@ -1,0 +1,25 @@
+on:
+  push:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.22.1'
+
+      - name: Set Up Keys
+        uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+        with: 
+          ssh-private-key: ${{ secrets.AWS_GITHUB_SSH_KEY }}
+          ssh-host: ${{ AWS_REMOTE_SERVER_IP }}
+
+      - name: Deploy
+        run: make deploy
