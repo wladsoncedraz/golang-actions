@@ -6,7 +6,7 @@ Wants=network-online.target
 
 [Service]
 Type=exec
-User=ubuntu
+User=root
 WorkingDirectory=/home/ubuntu
 ExecStart=/home/ubuntu/simple-http
 
